@@ -6,7 +6,7 @@ import java.util.List;
 
 public class QueryBehaviorPipeline<T extends Query<R>, R> extends BehaviorPipeline<QueryBehavior<T>> {
 
-    public QueryBehaviorPipeline(List<QueryBehavior<T>> behaviors, List<QueryBehavior<T>> globalBehaviors) {
-        super(behaviors, globalBehaviors);
+    public QueryBehaviorPipeline(List<QueryBehavior<T>> behaviors) {
+        super(behaviors);
     }
 }

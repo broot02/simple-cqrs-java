@@ -6,7 +6,7 @@ import java.util.*;
 
 public class CommandBehaviorPipeline<T extends Command<R>, R>  extends BehaviorPipeline<CommandBehavior<T>> {
 
-    public CommandBehaviorPipeline(List<CommandBehavior<T>> behaviors, List<CommandBehavior<T>> globalBehaviors) {
-        super(behaviors, globalBehaviors);
+    public CommandBehaviorPipeline(List<CommandBehavior<T>> behaviors) {
+        super(behaviors);
     }
 }
