@@ -8,10 +8,9 @@ public class BehaviorPipeline<T extends Behavior<?>> {
     private final List<T> behaviors;
     private final Iterator<T> behaviorIterator;
 
-    public BehaviorPipeline(List<T> behaviors, List<T> globalBehaviors) {
+    public BehaviorPipeline(List<T> behaviors) {
         this.behaviors = new ArrayList<>();
         this.behaviors.addAll(behaviors);
-        this.behaviors.addAll(globalBehaviors);
         this.behaviors.sort(Comparator.comparingInt(Behavior::getOrder));
 
         this.behaviorIterator = this.behaviors.listIterator();

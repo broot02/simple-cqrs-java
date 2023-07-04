@@ -31,8 +31,7 @@ public class QueryBus {
         }
 
         var behaviors = registry.getQueryBehaviors(query);
-        var globalBehaviors = registry.getGlobalBehaviors(query);
-        var pipeline = new QueryBehaviorPipeline<>(behaviors, globalBehaviors);
+        var pipeline = new QueryBehaviorPipeline<>(behaviors);
 
         while (pipeline.hasNext()) {
             var behavior = pipeline.next();

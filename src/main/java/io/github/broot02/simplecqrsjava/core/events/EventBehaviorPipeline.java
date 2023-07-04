@@ -6,7 +6,7 @@ import java.util.*;
 
 public class EventBehaviorPipeline<T extends Event<R>, R>  extends BehaviorPipeline<EventBehavior<T>> {
 
-    public EventBehaviorPipeline(List<EventBehavior<T>> behaviors, List<EventBehavior<T>> globalBehaviors) {
-        super(behaviors, globalBehaviors);
+    public EventBehaviorPipeline(List<EventBehavior<T>> behaviors) {
+        super(behaviors);
     }
 }

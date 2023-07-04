@@ -30,8 +30,7 @@ public class CommandBus {
         }
 
         var behaviors = registry.getCommandBehaviors(command);
-        var globalBehaviors = registry.getGlobalBehaviors(command);
-        var pipeline = new CommandBehaviorPipeline<>(behaviors, globalBehaviors);
+        var pipeline = new CommandBehaviorPipeline<>(behaviors);
 
         while (pipeline.hasNext()) {
             var behavior = pipeline.next();
