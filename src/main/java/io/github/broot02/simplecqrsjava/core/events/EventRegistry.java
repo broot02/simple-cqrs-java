@@ -30,14 +30,4 @@ public interface EventRegistry {
      * @return {@link List} list of {@link EventBehavior} behaviors that should be performed on the pipeline
      */
     <T extends Event<R>, R> List<EventBehavior<T>> getEventBehaviors(T event);
-
-    /**
-     * Retrieves the GlobalEventBehaviors for the registry, these global behaviors will be used with any {@link Event}.
-     *
-     * @param event - the event to be used to retrieve the behaviors
-     * @param <T>   - concrete type of {@link Event}
-     * @param <R>   - concrete type of data associated with the {@link Event}
-     * @return {@link List} list of {@link EventBehavior} behaviors that should be performed on the pipeline
-     */
-    <T extends Event<R>, R> List<EventBehavior<T>> getGlobalBehaviors(T event);
 }

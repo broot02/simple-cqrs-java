@@ -30,8 +30,7 @@ public class EventBus {
         }
 
         var behaviors = registry.getEventBehaviors(event);
-        var globalBehaviors = registry.getGlobalBehaviors(event);
-        var pipeline = new EventBehaviorPipeline<>(behaviors, globalBehaviors);
+        var pipeline = new EventBehaviorPipeline<>(behaviors);
 
         while (pipeline.hasNext()) {
             var behavior = pipeline.next();
