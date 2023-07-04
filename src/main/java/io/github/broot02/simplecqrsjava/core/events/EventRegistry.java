@@ -1,5 +1,7 @@
 package io.github.broot02.simplecqrsjava.core.events;
 
+import java.util.List;
+
 /**
  * Responsible for registering Events/Handlers for future usage. It is the responsibility of the calling library to provide implementations of this class,
  * there may be convenience libraries, but those implementations must be part of a separate library/jar.
@@ -13,9 +15,27 @@ public interface EventRegistry {
      * Retrieves the EventHandler for the given event.
      *
      * @param event - the event to be used to retrieve the handler
-     * @param <T>     - concrete type of {@link Event}
-     * @param <T2>    - concrete type of {@link EventHandler}
+     * @param <T>   - concrete type of {@link Event}
+     * @param <T2>  - concrete type of {@link EventHandler}
      * @return {@link EventHandler} which handles the provided event
      */
     <T extends Event<?>, T2 extends EventHandler<T>> T2 getEventHandler(T event);
+
+    /**
+     * Retrieves the EventBehaviors for the given event.
+     *
+     * @param event - the event to be used to retrieve the behaviors
+     * @param <T>   - concrete type of {@link Event}
+     * @return {@link List<EventBehavior>} list of behaviors that should be performed on the pipeline
+     */
+    <T extends Event<R>, R> List<EventBehavior<T>> getEventBehaviors(T event);
+
+    /**
+     * Retrieves the GlobalEventBehaviors for the registry.
+     *
+     * @param event - the event to be used to retrieve the behaviors
+     * @param <T>   - concrete type of {@link Event}
+     * @return {@link List<EventBehavior>} list of behaviors that should be performed on the pipeline
+     */
+    <T extends Event<R>, R> List<EventBehavior<T>> getGlobalBehaviors(T event);
 }
