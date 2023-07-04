@@ -27,16 +27,18 @@ public interface QueryRegistry {
      *
      * @param query - the query to be used to retrieve the behaviors
      * @param <T>   - concrete type of {@link Query}
-     * @return {@link List<QueryBehavior>} list of behaviors that should be performed on the pipeline
+     * @param <R>   - concrete type response to be returned from {@link Query}
+     * @return {@link List} list of {@link QueryBehavior} behaviors that should be performed on the pipeline
      */
     <T extends Query<R>, R> List<QueryBehavior<T>> getQueryBehaviors(T query);
 
     /**
-     * Retrieves the GlobalQueryBehaviors for the registry.
+     * Retrieves the GlobalQueryBehaviors for the registry, these global behaviors will be used with any {@link Query}
      *
      * @param query - the query to be used to retrieve the behaviors
      * @param <T>   - concrete type of {@link Query}
-     * @return {@link List<QueryBehavior>} list of behaviors that should be performed on the pipeline
+     * @param <R>   - concrete type response to be returned from {@link Query}
+     * @return {@link List} list of {@link QueryBehavior} behaviors that should be performed on the pipeline
      */
     <T extends Query<R>, R> List<QueryBehavior<T>> getGlobalBehaviors(T query);
 
