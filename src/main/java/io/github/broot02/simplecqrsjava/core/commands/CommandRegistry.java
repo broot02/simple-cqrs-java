@@ -1,5 +1,9 @@
 package io.github.broot02.simplecqrsjava.core.commands;
 
+import io.github.broot02.simplecqrsjava.core.behaviors.Behavior;
+
+import java.util.List;
+
 /**
  * Responsible for registering Commands/Handlers for future usage. It is the responsibility of the calling library to provide implementations of this class,
  * there may be convenience libraries, but those implementations must be part of a separate library/jar.
@@ -8,6 +12,7 @@ package io.github.broot02.simplecqrsjava.core.commands;
  * It might be a possibility to guarantee this in the future, but in current state this will not be guaranteed.
  */
 public interface CommandRegistry {
+
 
     /**
      * Retrieves the CommandHandler for the given command.
@@ -19,5 +24,21 @@ public interface CommandRegistry {
      * @return {@link CommandHandler} which handles the provided command
      */
     <R, T extends Command<R>, T2 extends CommandHandler<T, R>> T2 getCommandHandler(T command);
+
+    /**
+     * Retrieves the CommandBehaviors for the given command.
+     *
+     * @param command - the command to be used to retrieve the behaviors
+     * @param <T>     - concrete type of {@link Command}
+     * @return {@link List<Behavior>} ordered list of behaviors that should be performed on the pipeline
+     */
+    <T extends Command<R>, R> List<CommandBehavior<T>> getCommandBehaviors(T command);
+
+    /**
+     * Retrieves the GlobalCommandBehaviors for the registry.
+     *
+     * @return {@link List<Behavior>} ordered list of behaviors that should be performed on the pipeline
+     */
+    <T extends Command<R>, R> List<CommandBehavior<T>> getGlobalBehaviors(T command);
 
 }

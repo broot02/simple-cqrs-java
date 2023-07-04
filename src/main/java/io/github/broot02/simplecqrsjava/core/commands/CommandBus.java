@@ -29,6 +29,20 @@ public class CommandBus {
             throw new UnregisteredHandlerException(command.getClass());
         }
 
+        var behaviors = registry.getCommandBehaviors(command);
+        var globalBehaviors = registry.getGlobalBehaviors(command);
+        var pipeline = new CommandBehaviorPipeline<>(behaviors, globalBehaviors);
+
+        while (pipeline.hasNext()) {
+            var behavior = pipeline.next();
+
+            behavior.ifPresent(commandBehavior -> {
+                if (commandBehavior.shouldExecute(command)) {
+                    commandBehavior.handle(command);
+                }
+            });
+        }
+
         return handler.handle(command);
     }
 }

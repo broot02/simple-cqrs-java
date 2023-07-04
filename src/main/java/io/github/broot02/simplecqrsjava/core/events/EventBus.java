@@ -29,6 +29,20 @@ public class EventBus {
             throw new UnregisteredHandlerException(event.getClass());
         }
 
+        var behaviors = registry.getEventBehaviors(event);
+        var globalBehaviors = registry.getGlobalBehaviors(event);
+        var pipeline = new EventBehaviorPipeline<>(behaviors, globalBehaviors);
+
+        while (pipeline.hasNext()) {
+            var behavior = pipeline.next();
+
+            behavior.ifPresent(eventBehavior -> {
+                if (eventBehavior.shouldExecute(event)) {
+                    eventBehavior.handle(event);
+                }
+            });
+        }
+
         handler.handle(event);
     }
 }

@@ -30,6 +30,20 @@ public class QueryBus {
             throw new UnregisteredHandlerException(query.getClass());
         }
 
+        var behaviors = registry.getQueryBehaviors(query);
+        var globalBehaviors = registry.getGlobalBehaviors(query);
+        var pipeline = new QueryBehaviorPipeline<>(behaviors, globalBehaviors);
+
+        while (pipeline.hasNext()) {
+            var behavior = pipeline.next();
+
+            behavior.ifPresent(queryBehavior -> {
+                if (queryBehavior.shouldExecute(query)) {
+                    queryBehavior.handle(query);
+                }
+            });
+        }
+
         return handler.handle(query);
     }
 }
