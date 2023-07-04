@@ -1,7 +1,5 @@
 package io.github.broot02.simplecqrsjava.core.commands;
 
-import io.github.broot02.simplecqrsjava.core.behaviors.Behavior;
-
 import java.util.List;
 
 /**
@@ -30,14 +28,18 @@ public interface CommandRegistry {
      *
      * @param command - the command to be used to retrieve the behaviors
      * @param <T>     - concrete type of {@link Command}
-     * @return {@link List<Behavior>} ordered list of behaviors that should be performed on the pipeline
+     * @param <R>     - concrete type of response, which is associated with {@link Command}
+     * @return {@link List} ordered list of {@link CommandBehavior} that should be performed on the pipeline
      */
     <T extends Command<R>, R> List<CommandBehavior<T>> getCommandBehaviors(T command);
 
     /**
-     * Retrieves the GlobalCommandBehaviors for the registry.
+     * Retrieves the Global CommandBehaviors for the pipeline, these global behaviors will be used with any {@link Command}
      *
-     * @return {@link List<Behavior>} ordered list of behaviors that should be performed on the pipeline
+     * @param command - the command to be used to retrieve the behaviors
+     * @param <T>     - concrete type of {@link Command}
+     * @param <R>     - concrete type of response, which is associated with {@link Command}
+     * @return {@link List} ordered list of {@link CommandBehavior} that should be performed on the pipeline
      */
     <T extends Command<R>, R> List<CommandBehavior<T>> getGlobalBehaviors(T command);
 
